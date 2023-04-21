@@ -1,0 +1,227 @@
+#########################---CODE OVERVIEW---#########################
+
+#########################---COMPANY - DEVREV---########################
+
+#########################---PROJECT - LIBRARY MANAGEMENT SYSTEM---########################
+
+#########################---AUTHOR: ANIRUDH KRISHNAKUMAR(RA1911026040043)_SRMIST_4THYR_CSE_AIML----########################
+
+
+
+Structure of files :
+______________________________________________________
+
+----> Main Folder(DEVREV_TASK)
+       
+         |
+         |_________ Node Modules ---> Contains generated code (directory created by npm and a way of tracking each packages you install locally via package.json)
+         
+         |
+         |_________Public ------> Files publicly accessible
+         
+         |
+         |_________(srcfolder) ---> Main Folder contains all the code used in development
+
+
+
+
+
+
+Code review or explanation of each component created:
+______________________________________________________
+
+
+BookInformation Component:
+_________________________
+
+
+Basic overview of what actually bookinformation.jsx does:
+
+This component fetches and displays information about a book from an external openlibrary API. The code uses hooks like useParams, useState, and useEffect to manage state and update the UI. It also uses a loading spinner component to display while the book data is being loaded. Once the data is loaded, the component renders the book information in a nice format.
+
+Detailed Explanation:
+
+    Importing dependencies: The first few lines of code import React, useState, useEffect, useParams, and useNavigate from the 'react' and 'react-router-dom' packages.
+
+    Component function: The BookInformation function is defined, which returns the JSX code that will be rendered on the webpage.
+
+    useParams: The useParams hook is used to get the 'id' parameter from the URL.
+
+    useState: Two state variables are declared using the useState hook: 'loading', which is initialized as 'false', and 'book', which is initialized as 'null'. 'loading' is used to track whether data is being fetched, while 'book' stores the book data that will be displayed on the webpage.
+
+    useNavigate: The useNavigate hook is used to navigate back to the main book page when the 'Go Back' button is clicked.
+
+    useEffect: The useEffect hook is used to fetch book data when the component is first mounted. Inside the hook, the setLoading state variable is set to true to indicate that data is being fetched. Then, the 'getBookInformation' async function is called, which sends a GET request to the Open Library API to retrieve book data. If data is successfully retrieved, it is stored in the 'book' state variable. Otherwise, 'book' is set to null. Finally, setLoading is set back to false.
+
+    Conditional rendering: The loading state variable is used to conditionally render a 'Loading' component while data is being fetched.
+
+    JSX code: The JSX code inside the BookInformation function contains a button to navigate back to the main book page, an image of the book cover, and various details about the book, such as the title, description, subject places, subject times, and subjects.
+
+To optimize this code in the future, you could consider implementing client-side caching of the book data, so that the data can be quickly retrieved without needing to send a GET request to the API every time the user views a book's information. Additionally, you could use lazy loading to improve performance by only loading the book cover image when it is needed. Finally, you could consider adding error handling to handle cases where the API request fails.
+
+
+_________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+Book Component:
+_________________________
+
+
+Basic overview of what actually book.jsx does:
+
+This component displays information about a book, such as its cover image, title, author, and publication details. It is used to render each book item in a list of books.
+
+Detailed Explanation:
+    The function Book accepts an object book as its parameter.
+    A div with a class name of book-item is created, with two child divs: book-item-img and book-item-info.
+    book.cover_img is the URL of the book cover image, which is set as the src attribute of an img tag inside the book-item-img div.
+    Link component is used to link the title of the book to a specific route, with the book.id as a parameter.
+    The book.title is displayed inside a div with a class name of book-item-info-item title.
+    The author, total edition count, and first publish year of the book are also displayed inside their respective divs, each with their own class name.
+    book.author.join(", ") formats the author's names into a comma-separated string.
+    The Book component is exported for use in other parts of the application.
+
+Optimization:
+
+    Instead of rendering all the book properties on each book item, we can use React's memo or shouldComponentUpdate to render only the necessary changes to improve performance.
+
+
+_________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+BookList Component:
+_________________________
+
+
+Basic overview of what actually booklist.jsx does:
+
+This component displays a list of books, with pagination, based on data fetched from a global context. It also handles the logic for adding cover images to the books, and displays a loading spinner while data is being fetched.
+
+Detailed Explanation:
+
+
+    useGlobalContext():
+        This is a custom React hook that returns the global context of the application.
+        It is used here to access the state and functionality of the context, which contains data related to books, loading status, search results, and pagination.
+        This function helps to avoid prop drilling and allows components to access the shared state and methods in a more convenient way.
+
+    booksWithCovers:
+        This function maps over each book in the books array and adds an id property and a cover_img property to each book object.
+        The id property is derived from the id of the book and removes the "/works/" prefix, which is not needed for this application.
+        The cover_img property is generated based on the cover_id of the book, which is obtained from the Open Library API.
+        If a cover_id is not available, a default cover image is used instead.
+        This function helps to prepare the data for rendering the Book components and ensures that each book has an appropriate cover image.
+
+    currentBooks:
+        This function slices the booksWithCovers array to return only the books that should be displayed on the current page.
+        It uses the currentPage and itemsPerPage variables from the context to determine which books should be displayed.
+        This function helps to implement pagination and ensures that only a certain number of books are displayed on each page.
+
+    Book:
+        This function renders the HTML for a single book item in the book list.
+        It takes a book object as a parameter and extracts the necessary data (e.g. title, author, edition count, etc.) from it.
+        It returns a div element with the appropriate class names and child elements, including an image of the book cover, the book title (as a link to the book's details page), the book's author(s), and additional information about the book.
+        This function helps to modularize the code and make it easier to render each book item in a consistent way.
+
+    handlePageChange:
+        This function is a callback function that is called when the user clicks on the "Previous" or "Next" buttons to navigate to a different page.
+        It takes a pageNumber argument and updates the currentPage variable in the context accordingly.
+        This function helps to implement pagination and allows the user to navigate between different pages of the book list.
+
+    BookList:
+        This function is the main component that renders the book list page.
+        It uses the useGlobalContext hook to access the necessary state and functionality from the context.
+        It calls the booksWithCovers and currentBooks functions to prepare the data for rendering.
+        It returns a section element with the appropriate class names and child elements, including the book list grid (populated with Book components), a pagination component (with "Previous" and "Next" buttons), and information about the current page number and total number of pages.
+        This function is the glue that ties everything together and provides the main logic and structure for rendering the book list page.
+
+
+
+_________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+Searchbar Component:
+_________________________
+
+
+Basic overview of what actually searchbar.jsx does:
+
+The purpose of this code is to create a global state and context for managing data related to searching for books using the OpenLibrary API. The states are used to keep track of the current search term, the books returned by the API, the loading status, the result title, the current page number, and the number of items per page. The fetchBooks function is used to retrieve data from the OpenLibrary API based on the current search term, current page number, and number of items per page. The handlePageChange function is used to update the current page number when a new page is selected. These functions are memoized and run only when the relevant state variables change to optimize performance. The useGlobalContext hook is used to provide access to the context values from any component that needs them. Overall, this code provides a scalable and reusable solution for managing data related to searching for books in a React application.
+
+
+Detailed Explanation:
+
+
+    useState: Used to manage state variables within the component, specifically searchTerm, books, loading, resultTitle, currentPage, and itemsPerPage.
+    Optimization: Consider using useReducer instead of multiple useState calls for better performance and code organization.
+
+    useEffect: Used to handle side-effects, specifically fetching books data from the OpenLibrary API.
+    Optimization: Memoize the fetchBooks function using useCallback to prevent unnecessary re-renders and avoid infinite loops.
+
+    useCallback: Used to memoize the fetchBooks function to prevent unnecessary re-renders and avoid infinite loops.
+    Optimization: None needed.
+
+    createContext: Used to create a context object that can be shared by multiple components.
+    Optimization: None needed.
+
+    AppProvider: A higher-order component that wraps the entire app and provides the AppContext object to its children via context API.
+    Optimization: None needed.
+
+    useGlobalContext: A custom hook that returns the AppContext object.
+    Optimization: None needed.
+
+
+
+
+_________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+Context Component:
+_________________________
+
+
+Basic overview of what actually context.jsx does:
+
+This fetches data from the Open Library API based on a search term entered by the user, and displays the results in a paginated list. It uses state variables to manage the search term, the list of books, and the current page number, as well as a context provider to manage state across different components. The code uses callbacks and useEffect to handle data fetching and pagination, and could be optimized in the future by implementing server-side pagination or caching frequently-accessed data.
+
+Detailed Explanation:
+
+
+        useState - This function is used to create state variables for the search term, books, loading state, result title, current page, and items per page. It's used to store and manage the state of the application. To optimize its usage, we can consider reducing the number of state variables used, using more complex data structures instead of individual variables, or implementing state management with a library like Redux.
+
+    React.createContext() - This function is used to create a context for passing state and functions down to child components. It's used to provide access to the state and functions across the application. To optimize its usage, we can consider limiting the amount of data passed through it and using it only when necessary.
+
+    useCallback - This function is used to memoize the fetchBooks function and prevent unnecessary re-renders. It's used to optimize performance by avoiding re-rendering of components that don't need to be updated. To optimize its usage, we can consider memoizing other functions or using a library like useMemo.
+
+    useEffect - This function is used to fetch books from the OpenLibrary API when the search term, current page, or items per page changes. It's used to perform side effects, such as fetching data, after rendering. To optimize its usage, we can consider using more specific dependencies to avoid unnecessary re-fetching of data.
+
+    handlePageChange - This function is used to update the current page state when the user clicks on a new page number. It's used to handle user input and update the state accordingly. To optimize its usage, we can consider using a more efficient algorithm for pagination, such as lazy loading or infinite scrolling.
+
+    AppProvider - This function is used to wrap the entire application and provide access to the state and functions through the context API. It's used to manage the application state and provide it to child components. To optimize its usage, we can consider splitting it into smaller components and using a more scalable state management solution, such as Redux.
+
+    useGlobalContext - This function is used to access the state and functions from the AppContext. It's used to provide easy access to the state and functions without the need for prop drilling. To optimize its usage, we can consider using other state management solutions, such as Redux or MobX.
+
+
+
+
+
+
+_________________________________________________________________________________________________________________________________________________________________________________
+
+
+
+
+
+
+
+
+
+
+
+
