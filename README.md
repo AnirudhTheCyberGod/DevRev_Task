@@ -1,5 +1,5 @@
 ## DevRev_Task
-Library Management System web application
+Library Management System web application (FRONT END)
 
 I am not sure about the issue i encounter after deployment in vercel. I am able to surf to pages but the search function is not wokirng as it is expected to be. Please watch the demo video.
 Any doubts please ping me: anirudhkrishna012@gmail.com.  Thanks
