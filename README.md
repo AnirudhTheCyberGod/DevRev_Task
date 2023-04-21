@@ -1,13 +1,9 @@
 # DevRev_Task
 Library Management System web application
 
-#########################---CODE OVERVIEW---#########################
+---CODE OVERVIEW--
 
-#########################---COMPANY - DEVREV---########################
-
-#########################---PROJECT - LIBRARY MANAGEMENT SYSTEM---########################
-
-#########################---AUTHOR: ANIRUDH KRISHNAKUMAR(RA1911026040043)_SRMIST_4THYR_CSE_AIML----########################
+---AUTHOR: ANIRUDH KRISHNAKUMAR(RA1911026040043)_SRMIST_4THYR_CSE_AIML----
 
 
 
