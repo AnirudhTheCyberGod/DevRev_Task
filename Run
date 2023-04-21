@@ -1,0 +1,13 @@
+Before starting the deployment server we need to install node_modules in order to run the react-scripts then only we can run npm start for starting the deployement server
+
+npm install
+
+Next.
+
+npm start
+
+Runs the app in the development mode.
+Open http://localhost:3000 to view it in your browser.
+
+The page will reload when you make changes.
+You may also see any lint errors in the console.
