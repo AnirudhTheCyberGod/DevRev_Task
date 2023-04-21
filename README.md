@@ -1,3 +1,5 @@
+Please watch the demo video aftre deployment in vercel i am not sure of the issue the site is not performing as it ia intended to. I have made working demo. Any doubts please ping email: anirudhkrishna012@gmail.com
+
 Download the repo as a zip and cd into main project directory i.e(src) and then run the following commands
 
 ### `npm install`
